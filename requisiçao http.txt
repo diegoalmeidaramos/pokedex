@@ -1,0 +1,43 @@
+API - é um servidor , serve dados para um aplicativo ou programa
+
+
+REQUISIÇÃO HTTP
+
+
+toda requisilçao é feita por um dominio ou ip seguido do caminho de identificação
+
+1º- url: https://pokeapi.co/api/v2/pokemon/
+
+ https://pokeapi.co/ (DOMINIO OU IP)
+
+ api/v2/pokemon/(PATCH - CAMINHO DE IDENTIFICAÇAO DE RECURSO)
+  :
+  REQUEST METHOD
+2- TIPOS DE METODOS - GET(BUSCAR), POST(INSERIR),PUT(ATUALIZAR), DELETE(REMOVER)
+
+
+
+PATH - https://pokeapi.co/api/v2/pokemon/
+seria -> /pokemon/
+
+QUERY STRING -  vem depois do ? (caso tenha)
+  https://pokeapi.co/api/v2/pokemon?type=grama&name=i  SEMPRE SERA CHAVE E VALOR
+
+3- HEADERS
+
+ Request Headers
+
+configuração da API
+
+ Response Headers
+
+ Configuração da API
+
+4- REQUEST BODY
+{
+    "name": "teste"
+}
+
+5- STATUS CODE : 200 (significa OK)
+  response headers
+  response body
