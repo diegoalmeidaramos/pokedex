@@ -3,15 +3,18 @@ const offset = 0;
 const limit = 10;
 const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
 
+function converterTiposDePokemonEmLi (pokemonTipo)  {
+    return pokemonTipo.map((typeSlot) => ` <li class="tipo">${typeSlot.type.name}</li>`)
+}
+
 function converterPokemonEmLiHtml (pokemon){
     return `
     <li class="pokemon">
-    <span class="numero">#001</span>
+    <span class="numero">${pokemon.order}</span>
     <span class="nome">${pokemon.name}</span>
     <div class="detalhes">
         <ol class="tipos">
-            <li class="tipo">Grama</li>
-            <li class="tipo">Veneno</li>
+            ${converterTiposDePokemonEmLi(pokemon.types).join('')}
         </ol>
 
         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg"
