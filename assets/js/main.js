@@ -3,21 +3,20 @@ const offset = 0;
 const limit = 10;
 const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
 
-function converterTiposDePokemonEmLi (pokemonTipo)  {
-    return pokemonTipo.map((typeSlot) => ` <li class="tipo">${typeSlot.type.name}</li>`)
-}
+
+
 
 function converterPokemonEmLiHtml (pokemon){
     return `
     <li class="pokemon">
-    <span class="numero">${pokemon.order}</span>
-    <span class="nome">${pokemon.name}</span>
+    <span class="numero">${pokemon.numero}</span>
+    <span class="nome">${pokemon.nome}</span>
     <div class="detalhes">
         <ol class="tipos">
-            ${converterTiposDePokemonEmLi(pokemon.types).join('')}
+            ${pokemon.types.map((type) => `<li class="tipo">${type}</li>`).join('')}
         </ol>
 
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg"
+        <img src="${pokemon.foto}"
             alt="${pokemon.name}">
     </div>
 </li>
@@ -30,7 +29,9 @@ const pokemonLista = document.getElementById('pokemonLista')
 
 
 pokeApi.getPokemons().then((pokemons = []) => {
-        pokemonLista.innerHTML += pokemons.map(converterPokemonEmLiHtml).join('')
+    const novoHtml =  pokemons.map(converterPokemonEmLiHtml).join('')
+        pokemonLista.innerHTML = novoHtml
+        
 
 
 
