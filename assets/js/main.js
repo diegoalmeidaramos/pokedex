@@ -8,12 +8,12 @@ const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
 
 function converterPokemonEmLiHtml (pokemon){
     return `
-    <li class="pokemon">
+    <li class="pokemon" ${pokemon.type}>
     <span class="numero">${pokemon.numero}</span>
     <span class="nome">${pokemon.nome}</span>
     <div class="detalhes">
-        <ol class="tipos">
-            ${pokemon.types.map((type) => `<li class="tipo">${type}</li>`).join('')}
+        <ol class="types">
+            ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}
         </ol>
 
         <img src="${pokemon.foto}"
