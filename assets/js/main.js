@@ -1,36 +1,42 @@
 
-const offset = 0;
-const limit = 10;
+
 const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
-
-
-
-
-function converterPokemonEmLiHtml (pokemon){
-    return `
-    <li class="pokemon" ${pokemon.type}>
-    <span class="numero">${pokemon.numero}</span>
-    <span class="nome">${pokemon.nome}</span>
-    <div class="detalhes">
-        <ol class="types">
-            ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}
-        </ol>
-
-        <img src="${pokemon.foto}"
-            alt="${pokemon.name}">
-    </div>
-</li>
-
-    `
-}
-
 const pokemonLista = document.getElementById('pokemonLista')
+const botaoVerMais = document.getElementById('vermais')
+const limit = 5;
+let offset = 0;
 
 
 
-pokeApi.getPokemons().then((pokemons = []) => {
-    const novoHtml =  pokemons.map(converterPokemonEmLiHtml).join('')
-        pokemonLista.innerHTML = novoHtml
+
+function carregarPokemons(offset, limit){
+    pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
+        const novoHtml = pokemons.map((pokemon) => {
+            return `
+              <li class="pokemon ${pokemon.type}" >
+                <span class="numero">${pokemon.numero}</span>
+                <span class="nome">${pokemon.nome}</span>
+                <div class="detalhes">
+                  <ol class="types">
+                    ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}
+                  </ol>
+                  <img src="${pokemon.foto}" alt="${pokemon.name}">
+                </div>
+              </li>
+            `;
+          }).join('');
+          
+            pokemonLista.innerHTML += novoHtml
+})}
+
+
+carregarPokemons(offset,limit)
+
+botaoVerMais.addEventListener('click', () => {
+    offset += limit
+    carregarPokemons(offset,limit)
+})
+
         
 
 
@@ -45,7 +51,4 @@ pokeApi.getPokemons().then((pokemons = []) => {
 
 //    console.log(listaItens);
 
-})
-.catch((error) => console.error(error)) //(catch) caso der erro 
- 
 
